@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         //  transform.position = new Vector3(10,4,10);
     }
 
@@ -35,15 +37,20 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        Debug.Log(rb.velocity.magnitude);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
-        transform.Rotate(0, inputMouseX * SpeedRotate *Time.deltaTime, 0);
+
+        transform.Rotate(0, inputMouseX * SpeedRotate * Time.deltaTime, 0);
         cameraTransform.Rotate(-inputMouseY * SpeedRotate * Time.deltaTime, 0, 0);
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 }
